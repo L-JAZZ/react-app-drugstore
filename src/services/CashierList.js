@@ -1,8 +1,26 @@
 import React from "react";
-import {Card, Table} from "react-bootstrap";
+import {Button, Card, Table} from "react-bootstrap";
+import axios from 'axios'
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 
 export class CashierList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            cashier:[]
+        };
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8091/api/cashier/get')
+            .then(response=>response.data)
+            .then((data)=>{
+                this.setState({cashier:data});
+            });
+
+    }
+
     render() {
         return(
             <Card className={"border border-dark bg-dark text-white"}>
@@ -23,9 +41,29 @@ export class CashierList extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                        <tr align={"center"}>
-                            <td colSpan={"7"}>empty list</td>
-                        </tr>
+                        {
+                            this.state.cashier.map((cashier)=>(
+                                <tr key={cashier.id}>
+                                    <td>{cashier.id}</td>
+                                    <td>{cashier.medicineId}</td>
+                                    <td>{cashier.custName}</td>
+                                    <td>{cashier.custSurname}</td>
+                                    <td>{cashier.customerId}</td>
+                                    <td>{cashier.medName}</td>
+                                    <td>{cashier.result}</td>
+                                    <td>
+                                        <ButtonGroup>
+                                            <Button size={"sm"} variant="danger" type="submit">
+                                                Delete
+                                            </Button>
+                                            <Button size={"sm"} variant="success" type="submit">
+                                                Edit
+                                            </Button>
+                                        </ButtonGroup>
+                                    </td>
+                                </tr>
+                            ))
+                        }
                         </tbody>
                     </Table>
                 </Card.Body>

@@ -1,23 +1,22 @@
 import React from "react";
 import {Button, Card, Table} from "react-bootstrap";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import axios from 'axios'
-import {Link} from "react-router-dom";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 
-export class DoctorList extends React.Component {
+export class DoctorCustomerList extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            doctor:[]
+            custdoc:[]
         };
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8087/api/doctor/')
+        axios.get('http://localhost:8090/api/custdoc/')
             .then(response=>response.data)
             .then((data)=>{
-                this.setState({doctor:data});
+                this.setState({custdoc:data});
             });
 
     }
@@ -26,26 +25,33 @@ export class DoctorList extends React.Component {
         return(
             <Card className={"border border-dark bg-dark text-white"}>
                 <Card.Header>
-                    Customers list
+                    Hospital List
                 </Card.Header>
                 <Card.Body className={"bg-dark"}>
                     <Table striped bordered hover variant="dark">
                         <thead>
                         <tr>
+
+                            <th>Customer ID</th>
+                            <th>Customer name</th>
+                            <th>Customer surname</th>
                             <th>Doctor ID</th>
-                            <th>Doctor name</th>
-                            <th>Doctor surname</th>
+                            <th>Doc Name</th>
+                            <th>Doc Surname</th>
+                            <th>Prescription</th>
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            this.state.doctor.map((doctor)=>(
-
-                                <tr key={doctor.id}>
-
-                                    <td>{doctor.id}</td>
-                                    <td>{doctor.name}</td>
-                                    <td>{doctor.surname}</td>
+                            this.state.custdoc.map((custdoc)=>(
+                                <tr key={custdoc.customerID}>
+                                    <td>{custdoc.customerID}</td>
+                                    <td>{custdoc.customerName}</td>
+                                    <td>{custdoc.customerSurname}</td>
+                                    <td>{custdoc.doctorID}</td>
+                                    <td>{custdoc.docName}</td>
+                                    <td>{custdoc.docSurname}</td>
+                                    <td>{custdoc.prescription.toString()}</td>
                                     <td>
                                         <ButtonGroup>
                                             <Button size={"sm"} variant="danger" type="submit">

@@ -1,8 +1,10 @@
 import React from "react";
 import {Card, Form, Button, Col} from "react-bootstrap";
+import axios from 'axios'
 
 
 export class Cashier extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {customerID:'',medicineID:''}
@@ -10,23 +12,35 @@ export class Cashier extends React.Component {
         this.submitCashier = this.submitCashier.bind(this);
     }
 
-    submitCashier(event){
+/*    submitCashier(event){
         alert(this.state.customerID + "  " + this.state.medicineID);
         event.preventDefault();
-    }
+    }*/
+
+    submitCashier = event => {
+        event.preventDefault();
+
+        axios.post("http://localhost:8091/api/cashier/sell/"+this.state.customerID+"/"+this.state.medicineID)
+            .then(response=>{
+                if(response.data != null){
+                    alert("new Order added!");
+                }
+            });
+    };
 
     cashierChange(event){
         this.setState({
             [event.target.name]:event.target.value
         })
     }
-/*    medicineChange(event){
-        this.setState({
-            [event.target.name]:event.target.value
-        })
-    }*/
 
     render() {
+        /*const CashierConstant={
+            customerID:this.state.customerID,
+            medicineID: this.state.customerID
+        };*/
+        const {customerID,medicineID} = this.state;
+
         return(
             <Card className={"border border-dark bg-dark text-white"}>
                 <Card.Header>
@@ -37,23 +51,23 @@ export class Cashier extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col} controlId={"from_customerID"}>
                                 <Form.Label>Customer ID</Form.Label>
-                                <Form.Control required
+                                <Form.Control required autoComplete={"off"}
                                                 name={"customerID"}
                                                 className={"text-white bg-dark"}
                                                 type="text"
                                                 placeholder="Customer ID"
-                                                value={this.state.customerID}
+                                                value={customerID}
                                                 onChange={this.cashierChange}
                                 />
                             </Form.Group>
                             <Form.Group as={Col} controlId={"from_medicineID"}>
                                 <Form.Label>Medicine ID</Form.Label>
-                                <Form.Control required
+                                <Form.Control required autoComplete={"off"}
                                               name={"medicineID"}
                                               className={"text-white bg-dark"}
                                               type="text"
                                               placeholder="med ID"
-                                              value={this.state.medicineID}
+                                              value={medicineID}
                                               onChange={this.cashierChange}
                                 />
                             </Form.Group>
