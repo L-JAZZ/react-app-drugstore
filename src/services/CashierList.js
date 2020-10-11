@@ -12,31 +12,19 @@ export class CashierList extends React.Component {
                 <Card.Body className={"bg-dark"}>
                     <Table striped bordered hover variant="dark">
                         <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
+                            <tr>
+                                <th>order ID</th>
+                                <th>Medicine ID</th>
+                                <th>Customer name</th>
+                                <th>Customer surname</th>
+                                <th>Customer ID</th>
+                                <th>Medicine name</th>
+                                <th>response</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td colSpan="1">Larry the Bird</td>
-                            <td></td>
-                            <td>@twitter</td>
+                        <tr align={"center"}>
+                            <td colSpan={"7"}>empty list</td>
                         </tr>
                         </tbody>
                     </Table>
