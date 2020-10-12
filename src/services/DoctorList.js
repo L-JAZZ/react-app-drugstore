@@ -2,7 +2,6 @@ import React from "react";
 import {Button, Card, Table} from "react-bootstrap";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import axios from 'axios'
-import {Link} from "react-router-dom";
 
 
 export class DoctorList extends React.Component {

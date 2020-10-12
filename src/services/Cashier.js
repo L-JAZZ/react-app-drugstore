@@ -12,12 +12,8 @@ export class Cashier extends React.Component {
         this.submitCashier = this.submitCashier.bind(this);
     }
 
-/*    submitCashier(event){
-        alert(this.state.customerID + "  " + this.state.medicineID);
-        event.preventDefault();
-    }*/
-
     submitCashier = event => {
+
         event.preventDefault();
 
         axios.post("http://localhost:8091/api/cashier/sell/"+this.state.customerID+"/"+this.state.medicineID)

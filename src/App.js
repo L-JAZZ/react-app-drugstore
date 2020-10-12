@@ -6,9 +6,12 @@ import {Welcome} from "./components/Welcome";
 import {Cashier} from "./services/Cashier";
 import {CashierList} from "./services/CashierList";
 import {CustomerList} from "./services/CustomerList";
+import {Customer} from "./services/Customer";
 import {DoctorList} from "./services/DoctorList";
+import {Doctor} from "./services/Doctor";
 import {DoctorCustomerList} from "./services/DoctorCustomerList";
 import {MedicineList} from "./services/MedicineList";
+import {Medicine} from "./services/Medicine";
 import {Footer} from "./components/Footer";
 
 import {
@@ -35,8 +38,11 @@ function App() {
                         <Route  path={"/cashier"} exact component={Cashier}/>
                         <Route  path={"/cashierList"} exact component={CashierList}/>
                         <Route  path={"/customerList"} exact component={CustomerList}/>
+                        <Route  path={"/customer"} exact component={Customer}/>
                         <Route  path={"/doctorList"} exact component={DoctorList}/>
+                        <Route  path={"/doctor"} exact component={Doctor}/>
                         <Route  path={"/medicineList"} exact component={MedicineList}/>
+                        <Route  path={"/medicine"} exact component={Medicine}/>
                         <Route  path={"/custdocList"} exact component={DoctorCustomerList}/>
 
                     </Switch>
