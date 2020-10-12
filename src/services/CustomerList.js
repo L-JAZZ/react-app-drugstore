@@ -21,6 +21,19 @@ export class CustomerList extends React.Component {
 
     }
 
+    delete=(id)=>{
+        axios.delete('http://localhost:8086/api/customer/deleteByID/'+id)
+        .then(response=> {
+                if (response.data != null) {
+                    alert("Deleting customer with id:" + id);
+                    this.setState({
+                        customer: this.state.customer.filter(customer=>customer.id !== id)
+                    })
+                }
+            }
+        )
+    };
+
     render() {
         return(
             <Card className={"border border-dark bg-dark text-white"}>
@@ -49,9 +62,9 @@ export class CustomerList extends React.Component {
                                     <td>{customer.prescription.toString()}</td>
                                     <td>
                                         <ButtonGroup>
-                                            <Button size={"sm"} variant="danger" type="submit">
-                                                Delete
-                                            </Button>
+                                        <Button onClick={this.delete.bind(this, customer.id)} size={"sm"} variant="danger" type="submit">
+                                            Delete
+                                        </Button>
                                             <Button size={"sm"} variant="success" type="submit">
                                                 Edit
                                             </Button>

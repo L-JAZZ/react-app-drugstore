@@ -18,8 +18,20 @@ export class DoctorCustomerList extends React.Component {
             .then((data)=>{
                 this.setState({custdoc:data});
             });
-
     }
+
+    delete=(id)=>{
+        axios.delete('http://localhost:8090/api/custdoc/delete/'+id)
+        .then(response=> {
+                if (response.data != null) {
+                    alert("Deleting custdoc with id:" + id);
+                    this.setState({
+                        custdoc: this.state.custdoc.filter(custdoc=>custdoc.customerID !== id)
+                    })
+                }
+            }
+        )
+    };
 
     render() {
         return(
@@ -32,7 +44,7 @@ export class DoctorCustomerList extends React.Component {
                         <thead>
                         <tr>
 
-                            <th>Customer ID</th>
+                            <th>record ID</th>
                             <th>Customer name</th>
                             <th>Customer surname</th>
                             <th>Doctor ID</th>
@@ -54,9 +66,9 @@ export class DoctorCustomerList extends React.Component {
                                     <td>{custdoc.prescription.toString()}</td>
                                     <td>
                                         <ButtonGroup>
-                                            <Button size={"sm"} variant="danger" type="submit">
-                                                Delete
-                                            </Button>
+                                        <Button onClick={this.delete.bind(this, custdoc.customerID)} size={"sm"} variant="danger" type="submit">
+                                            Delete
+                                        </Button>
                                             <Button size={"sm"} variant="success" type="submit">
                                                 Edit
                                             </Button>

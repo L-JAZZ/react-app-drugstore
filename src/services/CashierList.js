@@ -21,6 +21,19 @@ export class CashierList extends React.Component {
 
     }
 
+    delete=(id)=>{
+        axios.delete('http://localhost:8091/api/cashier/delete/'+id)
+        .then(response=> {
+                if (response.data != null) {
+                    alert("Deleting cashier with id:" + id);
+                    this.setState({
+                        cashier: this.state.cashier.filter(cashier=>cashier.id !== id)
+                    })
+                }
+            }
+        )
+    };
+
     render() {
         return(
             <Card className={"border border-dark bg-dark text-white"}>
@@ -53,7 +66,7 @@ export class CashierList extends React.Component {
                                     <td>{cashier.result}</td>
                                     <td>
                                         <ButtonGroup>
-                                            <Button size={"sm"} variant="danger" type="submit">
+                                            <Button onClick={this.delete.bind(this, cashier.id)} size={"sm"} variant="danger" type="submit">
                                                 Delete
                                             </Button>
                                             <Button size={"sm"} variant="success" type="submit">

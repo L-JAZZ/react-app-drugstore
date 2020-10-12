@@ -18,8 +18,20 @@ export class DoctorList extends React.Component {
             .then((data)=>{
                 this.setState({doctor:data});
             });
-
     }
+
+    delete=(id)=>{
+        axios.delete('http://localhost:8087/api/doctor/deleteByID/'+id)
+        .then(response=> {
+                if (response.data != null) {
+                    alert("Deleting custdoc with id:" + id);
+                    this.setState({
+                        doctor: this.state.doctor.filter(doctor=>doctor.id !== id)
+                    })
+                }
+            }
+        )
+    };
 
     render() {
         return(
@@ -47,9 +59,9 @@ export class DoctorList extends React.Component {
                                     <td>{doctor.surname}</td>
                                     <td>
                                         <ButtonGroup>
-                                            <Button size={"sm"} variant="danger" type="submit">
-                                                Delete
-                                            </Button>
+                                        <Button onClick={this.delete.bind(this, doctor.id)} size={"sm"} variant="danger" type="submit">
+                                            Delete
+                                        </Button>
                                             <Button size={"sm"} variant="success" type="submit">
                                                 Edit
                                             </Button>

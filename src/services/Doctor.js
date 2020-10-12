@@ -46,7 +46,7 @@ export class Doctor extends React.Component {
                     <Form onSubmit={this.submitDoctor} id={"customerFormID"}>
                         <Form.Row>
                             <Form.Group as={Col} controlId={"from_customerName"}>
-                                <Form.Label>Medicine Name</Form.Label>
+                                <Form.Label>Doctor Name</Form.Label>
                                 <Form.Control required autoComplete={"off"}
                                               name={"name"}
                                               className={"text-white bg-dark"}
@@ -57,7 +57,7 @@ export class Doctor extends React.Component {
                                 />
                             </Form.Group>
                             <Form.Group as={Col} controlId={"from_customerSurname"}>
-                                <Form.Label>quantity</Form.Label>
+                                <Form.Label>Doctor surname</Form.Label>
                                 <Form.Control required autoComplete={"off"}
                                               name={"surname"}
                                               className={"text-white bg-dark"}

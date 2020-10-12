@@ -10,6 +10,7 @@ import {Customer} from "./services/Customer";
 import {DoctorList} from "./services/DoctorList";
 import {Doctor} from "./services/Doctor";
 import {DoctorCustomerList} from "./services/DoctorCustomerList";
+import {DoctorCustomer} from "./services/DoctorCustomer";
 import {MedicineList} from "./services/MedicineList";
 import {Medicine} from "./services/Medicine";
 import {Footer} from "./components/Footer";
@@ -34,7 +35,7 @@ function App() {
             <Row>
                 <Col lg={12} style={marginTop}>
                     <Switch>
-                        <Route  path={"/welcome"} exact component={Welcome}/>
+                        <Route  path={"/"} exact component={Welcome}/>
                         <Route  path={"/cashier"} exact component={Cashier}/>
                         <Route  path={"/cashierList"} exact component={CashierList}/>
                         <Route  path={"/customerList"} exact component={CustomerList}/>
@@ -44,7 +45,7 @@ function App() {
                         <Route  path={"/medicineList"} exact component={MedicineList}/>
                         <Route  path={"/medicine"} exact component={Medicine}/>
                         <Route  path={"/custdocList"} exact component={DoctorCustomerList}/>
-
+                        <Route  path={"/custdoc"} exact component={DoctorCustomer}/>
                     </Switch>
                 </Col>
             </Row>
