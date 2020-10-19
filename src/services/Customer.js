@@ -7,9 +7,49 @@ export class Customer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {name:'',surname:'',balance:'',prescription:''}
+        this.state = {id:'',name:'',surname:'',balance:'',prescription:''}
         this.customerChange = this.customerChange.bind(this);
         this.submitCustomer = this.submitCustomer.bind(this);
+    }
+
+    componentDidMount() {
+        const customerID = +this.props.match.params.id;
+        if(customerID){
+            axios.get('http://localhost:8086/api/customer/id/'+customerID)
+                .then(response =>{
+                    if(response.data != null){
+                        this.setState({
+                            id:response.data.id,
+                            name:response.data.name,
+                            surname:response.data.surname,
+                            balance:response.data.balance,
+                            prescription:response.data.prescription,
+                        });
+                    }
+
+                }).catch((error)=>{
+                    console.error("error" + error)
+            });
+        }
+    }
+
+    updateCustomer = event =>{
+        const CustomerConstant={
+            id: this.state.id,
+            name:  this.state.name,
+            surname: this.state.surname,
+            balance: this.state.balance,
+            prescription: this.state.prescription
+        };
+
+        event.preventDefault();
+
+        axios.put("http://localhost:8086/api/customer/update/"+this.state.id,CustomerConstant)
+            .then(response=>{
+                if(response.data != null){
+                    alert("Updated successfully!");
+                }
+            });
     }
 
     customerChange(event){
@@ -33,7 +73,7 @@ export class Customer extends React.Component {
         axios.post("http://localhost:8086/api/customer/post/",CustomerConstant)
             .then(response=>{
                 if(response.data != null){
-                    alert("new Order added!");
+                    alert("new Customer added!");
                 }
             });
     };
@@ -47,7 +87,7 @@ export class Customer extends React.Component {
                     Add customer
                 </Card.Header>
                 <Card.Body className={"bg-dark"}>
-                    <Form onSubmit={this.submitCustomer} id={"customerFormID"}>
+                    <Form onSubmit={this.state.id ? this.updateCustomer : this.submitCustomer} id={"customerFormID"}>
                         <Form.Row>
                             <Form.Group as={Col} controlId={"from_customerName"}>
                                 <Form.Label>Customer Name</Form.Label>
@@ -97,7 +137,7 @@ export class Customer extends React.Component {
                         </Form.Row>
 
                         <Button size={"sm"} variant="success" type="submit">
-                            Submit
+                            {this.props.match.params.id ? "Update" : "Submit"}
                         </Button>
                     </Form>
                 </Card.Body>

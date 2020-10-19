@@ -7,7 +7,7 @@ export class Cashier extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {customerID:'',medicineID:''}
+        this.state = {id:'',customerID:'',medicineID:''}
         this.cashierChange = this.cashierChange.bind(this);
         this.submitCashier = this.submitCashier.bind(this);
     }

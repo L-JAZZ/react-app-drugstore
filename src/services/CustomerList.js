@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Card, Table} from "react-bootstrap";
 import axios from 'axios'
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import {Link} from "react-router-dom";
 
 
 export class CustomerList extends React.Component {
@@ -62,12 +63,10 @@ export class CustomerList extends React.Component {
                                     <td>{customer.prescription.toString()}</td>
                                     <td>
                                         <ButtonGroup>
-                                        <Button onClick={this.delete.bind(this, customer.id)} size={"sm"} variant="danger" type="submit">
-                                            Delete
-                                        </Button>
-                                            <Button size={"sm"} variant="success" type="submit">
-                                                Edit
+                                            <Button onClick={this.delete.bind(this, customer.id)} size={"sm"} variant="danger" type="submit">
+                                                Delete
                                             </Button>
+                                            <Link to={"editCustomer/"+customer.id} className={"btn btn-sm btn-success"}>Edit</Link>
                                         </ButtonGroup>
                                     </td>
                                 </tr>

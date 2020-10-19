@@ -40,12 +40,16 @@ function App() {
                         <Route  path={"/cashierList"} exact component={CashierList}/>
                         <Route  path={"/customerList"} exact component={CustomerList}/>
                         <Route  path={"/customer"} exact component={Customer}/>
+                        <Route  path={"/editCustomer/:id"} exact component={Customer}/>
                         <Route  path={"/doctorList"} exact component={DoctorList}/>
                         <Route  path={"/doctor"} exact component={Doctor}/>
+                        <Route  path={"/editDoctor/:id"} exact component={Doctor}/>
                         <Route  path={"/medicineList"} exact component={MedicineList}/>
                         <Route  path={"/medicine"} exact component={Medicine}/>
+                        <Route  path={"/editMedicine/:id"} exact component={Medicine}/>
                         <Route  path={"/custdocList"} exact component={DoctorCustomerList}/>
                         <Route  path={"/custdoc"} exact component={DoctorCustomer}/>
+                        <Route  path={"/editDoctorCustomer"} exact component={DoctorCustomer}/>
                     </Switch>
                 </Col>
             </Row>

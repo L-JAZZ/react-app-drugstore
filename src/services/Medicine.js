@@ -7,17 +7,55 @@ export class Medicine extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {medName:'',quantity:'',price:'',prescription:''}
+        this.state = {id:'',medName:'',quantity:'',price:'',prescription:''}
         this.MedicineChange = this.MedicineChange.bind(this);
         this.submitMedicine = this.submitMedicine.bind(this);
+    }
+
+    componentDidMount() {
+        const medicineID = this.props.match.params.id;
+        if(medicineID){
+            axios.get('http://localhost:8088/api/medicine/id/' + medicineID)
+                .then(response =>{
+                    if(response.data != null){
+                        this.setState({
+                            medName:response.data.medName,
+                            quantity:response.data.quantity,
+                            price:response.data.price,
+                            prescription:response.data.prescription,
+                        });
+                    }
+
+                }).catch((error)=>{
+                console.error("error" + error)
+            });
+        }
     }
 
     MedicineChange(event){
         this.setState({
             [event.target.name]:event.target.value
         })
-
     }
+
+    updateMedicine = event => {
+        const MedicineConstant={
+            id: this.state.id,
+            medName:  this.state.medName,
+            quantity: this.state.quantity,
+            price: this.state.price,
+            prescription: this.state.prescription
+        };
+
+        event.preventDefault();
+
+        axios.put("http://localhost:8088/api/medicine/update/"+this.state.id,MedicineConstant)
+            .then(response=>{
+                if(response.data != null){
+                    alert("Updated!");
+                }
+            });
+    };
 
     //arrow function that builds JSON that we can put into post request
     submitMedicine = event => {
@@ -47,7 +85,7 @@ export class Medicine extends React.Component {
                     Add Medicine
                 </Card.Header>
                 <Card.Body className={"bg-dark"}>
-                    <Form onSubmit={this.submitMedicine} id={"customerFormID"}>
+                    <Form onSubmit={this.state.id ? this.updateMedicine : this.submitMedicine} id={"customerFormID"}>
                         <Form.Row>
                             <Form.Group as={Col} controlId={"from_customerName"}>
                                 <Form.Label>Medicine Name</Form.Label>
@@ -97,7 +135,7 @@ export class Medicine extends React.Component {
                         </Form.Row>
 
                         <Button size={"sm"} variant="success" type="submit">
-                            Submit
+                            {this.props.match.params.id ? "Update" : "Submit"}
                         </Button>
                     </Form>
                 </Card.Body>

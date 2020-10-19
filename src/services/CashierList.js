@@ -69,9 +69,6 @@ export class CashierList extends React.Component {
                                             <Button onClick={this.delete.bind(this, cashier.id)} size={"sm"} variant="danger" type="submit">
                                                 Delete
                                             </Button>
-                                            <Button size={"sm"} variant="success" type="submit">
-                                                Edit
-                                            </Button>
                                         </ButtonGroup>
                                     </td>
                                 </tr>

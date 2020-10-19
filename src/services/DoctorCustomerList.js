@@ -66,11 +66,8 @@ export class DoctorCustomerList extends React.Component {
                                     <td>{custdoc.prescription.toString()}</td>
                                     <td>
                                         <ButtonGroup>
-                                        <Button onClick={this.delete.bind(this, custdoc.customerID)} size={"sm"} variant="danger" type="submit">
-                                            Delete
-                                        </Button>
-                                            <Button size={"sm"} variant="success" type="submit">
-                                                Edit
+                                            <Button onClick={this.delete.bind(this, custdoc.customerID)} size={"sm"} variant="danger" type="submit">
+                                                Delete
                                             </Button>
                                         </ButtonGroup>
                                     </td>
